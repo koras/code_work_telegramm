@@ -15,7 +15,7 @@ var token string
 
 func TelegramBot() {
 
-	errorENV := godotenv.Load()
+	errorENV := godotenv.Load(".env")
 
 	if errorENV != nil {
 		panic("No .env file found")
