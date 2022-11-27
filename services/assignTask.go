@@ -98,6 +98,6 @@ func GetPerformers(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		message = "Нет доступных исполнителей для проверки, надо указать стек технологий, php или go"
 	}
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
-	msg.ParseMode = "Markdown"
+
 	bot.Send(msg)
 }
