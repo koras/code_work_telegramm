@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv/autoload"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -12,6 +13,18 @@ import (
 //ConnectDB connects go to mysql database
 func ConnectDB() *gorm.DB {
 	errorENV := godotenv.Load()
+
+	//dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	//if err != nil {
+	//	log.Fatal(err)
+	//	}
+	//fmt.Println(dir)
+	//	environmentPath := filepath.Join(dir, ".env")
+	//	err = godotenv.Load(environmentPath)
+	//	panic(err)
+	//	fmt.Println(err)
+	//errorENV := godotenv.Load()
+	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
 	if errorENV != nil {
 		panic("Failed to load env file")
 	}
@@ -20,6 +33,7 @@ func ConnectDB() *gorm.DB {
 	dbPass := os.Getenv("DB_PASS")
 	dbHost := os.Getenv("DB_HOST")
 	dbName := os.Getenv("DB_NAME")
+	fmt.Println(dbUser)
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=true&loc=Local", dbUser, dbPass, dbHost, dbName)
 	db, errorDB := gorm.Open(mysql.Open(dsn), &gorm.Config{})
