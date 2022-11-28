@@ -4,16 +4,17 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 //ConnectDB connects go to mysql database
 func ConnectDB() *gorm.DB {
-	//	errorENV := godotenv.Load()
-	//	if errorENV != nil {
-	//		panic("Failed to load env file")
-	//	}
+	errorENV := godotenv.Load()
+	if errorENV != nil {
+		panic("Failed to load env file")
+	}
 
 	dbUser := os.Getenv("DB_USER")
 	dbPass := os.Getenv("DB_PASS")
