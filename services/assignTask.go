@@ -36,14 +36,9 @@ func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, stack string) {
 	var Performer string
 	var message string
 	var preparePerformers []string
-	var Performers []models.User
 
-	switch stack {
-	case "go":
-		Performers = controllers.GetPerformers("go")
-	case "php":
-		Performers = controllers.GetPerformers("php")
-	}
+	// список авторов
+	Performers := controllers.GetPerformers(stack)
 
 	// автор сообщения
 	autor := update.Message.From.UserName
