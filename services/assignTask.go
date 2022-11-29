@@ -37,7 +37,7 @@ func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, stack string) {
 	var message string
 	var preparePerformers []string
 	var Performers []models.User
-	// список авторов
+
 	switch stack {
 	case "go":
 		Performers = controllers.GetPerformers("go")
