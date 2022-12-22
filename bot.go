@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"moex/config"
 	"moex/services"
 
@@ -14,10 +15,12 @@ import (
 var token string
 
 var (
-	db *gorm.DB
+	db *gorm.DB = config.ConnectDB()
 )
 
 func init() {
+
+	fmt.Println("init")
 
 	env := ".env"
 
@@ -26,7 +29,7 @@ func init() {
 	if errorENV != nil {
 		panic("Failed to load env file")
 	}
-	db = config.ConnectDB()
+	//	db = config.ConnectDB()
 }
 
 func main() {

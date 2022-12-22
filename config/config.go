@@ -12,6 +12,8 @@ import (
 
 //ConnectDB connects go to mysql database
 func ConnectDB() *gorm.DB {
+	fmt.Println("ConnectDB")
+
 	//	env := ".env"
 
 	//errorENV := godotenv.Load(env)
