@@ -36,8 +36,9 @@ func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, stack string) {
 	var Performer string
 	var message string
 	var preparePerformers []string
+
 	// список авторов
-	Performers := controllers.GetPerformers("php")
+	Performers := controllers.GetPerformers(stack)
 
 	// автор сообщения
 	autor := update.Message.From.UserName
@@ -80,17 +81,17 @@ func GetPerformers(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if len(performersPHP) > 0 {
 		message += "php: \n"
-		for _, php := range performersPHP {
-			fmt.Println(php)
-			message += "@" + php + " \n"
+		for _, performerPHP := range performersPHP {
+			fmt.Println(performerPHP)
+			message += "@" + performerPHP + " \n"
 		}
 	}
 
 	if len(performersGO) > 0 {
 		message += "go: \n"
-		for _, php := range performersGO {
-			fmt.Println(php)
-			message += "@" + php + " \n"
+		for _, performerGO := range performersGO {
+			fmt.Println(performerGO)
+			message += "@" + performerGO + " \n"
 		}
 	}
 
