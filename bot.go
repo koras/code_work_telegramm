@@ -14,7 +14,7 @@ import (
 var token string
 
 var (
-	db *gorm.DB = config.ConnectDB()
+	db *gorm.DB
 )
 
 func init() {
@@ -26,6 +26,7 @@ func init() {
 	if errorENV != nil {
 		panic("Failed to load env file")
 	}
+	db = config.ConnectDB()
 }
 
 func main() {
