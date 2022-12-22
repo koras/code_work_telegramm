@@ -18,24 +18,13 @@ func ConnectDB() *gorm.DB {
 
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
+	fmt.Println("os.Args[0]")
+	fmt.Println(os.Args[0])
 	if err != nil {
 		log.Fatal(err)
 	}
 	environmentPath := filepath.Join(dir, ".env")
 	fmt.Println(environmentPath)
-	//	env := ".env"
-
-	//errorENV := godotenv.Load(env)
-
-	//dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	//if err != nil {
-	//	log.Fatal(err)
-	//	}
-	//fmt.Println(dir)
-	//	environmentPath := filepath.Join(dir, ".env")
-	//	err = godotenv.Load(environmentPath)
-	//	panic(err)
-	//	fmt.Println(err)
 	errorENV := godotenv.Load(environmentPath)
 	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
 	if errorENV != nil {
@@ -46,9 +35,7 @@ func ConnectDB() *gorm.DB {
 	dbPass := os.Getenv("DB_PASS_WORK")
 	dbHost := os.Getenv("DB_HOST_WORK")
 	dbName := os.Getenv("DB_NAME_WORK")
-	fmt.Println("het env" + dbUser)
-	fmt.Println(dbUser)
-	fmt.Println(dbHost)
+	fmt.Println("ConnectDB env" + dbUser)
 	fmt.Println(dbName)
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=true&loc=Local", dbUser, dbPass, dbHost, dbName)
 	db, errorDB := gorm.Open(mysql.Open(dsn), &gorm.Config{})
