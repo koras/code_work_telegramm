@@ -26,7 +26,7 @@ func ConnectDB() *gorm.DB {
 	errorENV := godotenv.Load(environmentPath)
 	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
 	if errorENV != nil {
-		panic("Failed to load env file")
+		panic("Failed to load env file ConnectDB")
 	}
 
 	dbUser := os.Getenv("DB_USER_WORK")

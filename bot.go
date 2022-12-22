@@ -27,7 +27,7 @@ func init() {
 	errorENV := godotenv.Load(env)
 	//errorENV := godotenv.Load()
 	if errorENV != nil {
-		panic("Failed to load env file")
+		panic("Failed to load env file init")
 	}
 	//	db = config.ConnectDB()
 }
