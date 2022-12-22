@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -24,11 +25,11 @@ func ConnectDB() *gorm.DB {
 	//	err = godotenv.Load(environmentPath)
 	//	panic(err)
 	//	fmt.Println(err)
-	//errorENV := godotenv.Load()
+	errorENV := godotenv.Load()
 	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
-	//	if errorENV != nil {
-	//	panic("Failed to load env file")
-	//}
+	if errorENV != nil {
+		panic("Failed to load env file")
+	}
 
 	dbUser := os.Getenv("DB_USER_WORK")
 	dbPass := os.Getenv("DB_PASS_WORK")
