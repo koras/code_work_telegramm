@@ -27,7 +27,7 @@ func ConnectDB() *gorm.DB {
 	//	err = godotenv.Load(environmentPath)
 	//	panic(err)
 	//	fmt.Println(err)
-	errorENV := godotenv.Load()
+	errorENV := godotenv.Load(".env")
 	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
 	if errorENV != nil {
 		panic("Failed to load env file")
