@@ -12,7 +12,9 @@ import (
 
 //ConnectDB connects go to mysql database
 func ConnectDB() *gorm.DB {
-	errorENV := godotenv.Load()
+	env := ".env"
+
+	errorENV := godotenv.Load(env)
 
 	//dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	//if err != nil {

@@ -4,8 +4,6 @@ import (
 	"os"
 	"regexp"
 
-	"github.com/joho/godotenv"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
@@ -15,13 +13,13 @@ var token string
 
 func TelegramBot() {
 
-	errorENV := godotenv.Load()
+	//	errorENV := godotenv.Load()
 
-	if errorENV != nil {
-		panic("No .env file found")
-	} else {
-		token = os.Getenv("TOKEN_TELEGRAM")
-	}
+	//if errorENV != nil {
+	//	panic("No .env file found")
+	//} else {
+	token = os.Getenv("TOKEN_TELEGRAM")
+	//	}
 
 	bot, err := tgbotapi.NewBotAPI(token)
 	bot.Debug = true
