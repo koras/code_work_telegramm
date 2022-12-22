@@ -2,7 +2,9 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
@@ -14,6 +16,13 @@ import (
 func ConnectDB() *gorm.DB {
 	fmt.Println("ConnectDB")
 
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	environmentPath := filepath.Join(dir, ".env")
+	fmt.Println(environmentPath)
 	//	env := ".env"
 
 	//errorENV := godotenv.Load(env)
@@ -27,7 +36,7 @@ func ConnectDB() *gorm.DB {
 	//	err = godotenv.Load(environmentPath)
 	//	panic(err)
 	//	fmt.Println(err)
-	errorENV := godotenv.Load(".env")
+	errorENV := godotenv.Load(environmentPath)
 	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
 	if errorENV != nil {
 		panic("Failed to load env file")
