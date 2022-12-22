@@ -34,8 +34,10 @@ func ConnectDB() *gorm.DB {
 	dbPass := os.Getenv("DB_PASS_WORK")
 	dbHost := os.Getenv("DB_HOST_WORK")
 	dbName := os.Getenv("DB_NAME_WORK")
+	fmt.Println("het env" + dbUser)
 	fmt.Println(dbUser)
-
+	fmt.Println(dbHost)
+	fmt.Println(dbName)
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=true&loc=Local", dbUser, dbPass, dbHost, dbName)
 	db, errorDB := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if errorDB != nil {
