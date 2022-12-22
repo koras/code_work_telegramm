@@ -18,7 +18,7 @@ func TelegramBot() {
 	//if errorENV != nil {
 	//	panic("No .env file found")
 	//} else {
-	token = os.Getenv("TOKEN_TELEGRAM")
+	token = os.Getenv("TOKEN_TELEGRAM_WORK")
 	//	}
 
 	bot, err := tgbotapi.NewBotAPI(token)

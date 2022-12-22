@@ -30,10 +30,10 @@ func ConnectDB() *gorm.DB {
 	//	panic("Failed to load env file")
 	//}
 
-	dbUser := os.Getenv("DB_USER")
-	dbPass := os.Getenv("DB_PASS")
-	dbHost := os.Getenv("DB_HOST")
-	dbName := os.Getenv("DB_NAME")
+	dbUser := os.Getenv("DB_USER_WORK")
+	dbPass := os.Getenv("DB_PASS_WORK")
+	dbHost := os.Getenv("DB_HOST_WORK")
+	dbName := os.Getenv("DB_NAME_WORK")
 	fmt.Println(dbUser)
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=true&loc=Local", dbUser, dbPass, dbHost, dbName)
