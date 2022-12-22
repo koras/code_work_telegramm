@@ -18,13 +18,11 @@ func ConnectDB() *gorm.DB {
 
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
-	fmt.Println("os.Args[0]")
-	fmt.Println(os.Args[0])
 	if err != nil {
 		log.Fatal(err)
 	}
 	environmentPath := filepath.Join(dir, ".env")
-	fmt.Println(environmentPath)
+	fmt.Println("environmentPath:" + environmentPath)
 	errorENV := godotenv.Load(environmentPath)
 	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
 	if errorENV != nil {
