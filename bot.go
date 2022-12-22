@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"moex/config"
 	"moex/services"
 
-	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 
 	//"github.com/joho/godotenv"
@@ -18,19 +16,19 @@ var (
 	db *gorm.DB = config.ConnectDB()
 )
 
-func init() {
+// func init() {
 
-	fmt.Println("init")
+// 	fmt.Println("init")
 
-	env := ".env"
+// 	env := ".env"
 
-	errorENV := godotenv.Load(env)
-	//errorENV := godotenv.Load()
-	if errorENV != nil {
-		panic("Failed to load env file init")
-	}
-	//	db = config.ConnectDB()
-}
+// 	errorENV := godotenv.Load(env)
+// 	//errorENV := godotenv.Load()
+// 	if errorENV != nil {
+// 		panic("Failed to load env file init")
+// 	}
+// 	//	db = config.ConnectDB()
+// }
 
 func main() {
 	defer config.DisconnectDB(db)
