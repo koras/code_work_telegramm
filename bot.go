@@ -16,20 +16,6 @@ var (
 	db *gorm.DB = config.ConnectDB()
 )
 
-// func init() {
-
-// 	fmt.Println("init")
-
-// 	env := ".env"
-
-// 	errorENV := godotenv.Load(env)
-// 	//errorENV := godotenv.Load()
-// 	if errorENV != nil {
-// 		panic("Failed to load env file init")
-// 	}
-// 	//	db = config.ConnectDB()
-// }
-
 func main() {
 	defer config.DisconnectDB(db)
 	// Вызываем бота

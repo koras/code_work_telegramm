@@ -14,17 +14,15 @@ import (
 
 //ConnectDB connects go to mysql database
 func ConnectDB() *gorm.DB {
-	fmt.Println("ConnectDB")
-
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	environmentPath := filepath.Join(dir, ".env")
-	fmt.Println("environmentPath:" + environmentPath)
+	fmt.Println(dir + ".env")
+	environmentPath := filepath.Join(dir + ".env")
 	errorENV := godotenv.Load(environmentPath)
-	//errorENV := godotenv.Load(filepath.Join(path_dir, ".env"))
+
 	if errorENV != nil {
 		panic("Failed to load env file ConnectDB")
 	}
@@ -33,12 +31,11 @@ func ConnectDB() *gorm.DB {
 	dbPass := os.Getenv("DB_PASS_WORK")
 	dbHost := os.Getenv("DB_HOST_WORK")
 	dbName := os.Getenv("DB_NAME_WORK")
-	fmt.Println("ConnectDB env" + dbUser)
-	fmt.Println(dbName)
+
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=true&loc=Local", dbUser, dbPass, dbHost, dbName)
 	db, errorDB := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if errorDB != nil {
-		panic("Failed to connect mysql database where base")
+		panic("Failed to connect mysql database where base  ")
 	}
 
 	return db

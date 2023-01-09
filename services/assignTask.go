@@ -15,11 +15,12 @@ import (
  */
 func deleteAutor(Performers []models.User, autor string) []string {
 	// все авторы имеют собавку в начале
-	autor = "@" + autor
+	//autor = "@" + autor
 	var newPerformers []string
 
+	fmt.Println("=======")
 	for _, performer := range Performers {
-		fmt.Println(performer.Nickname)
+		fmt.Println(performer.Nickname + " != " + autor)
 		if autor != performer.Nickname {
 			newPerformers = append(newPerformers, performer.Nickname)
 		}
@@ -46,6 +47,7 @@ func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, stack string) {
 	fmt.Println(preparePerformers)
 	preparePerformers = deleteAutor(Performers, autor)
 
+	fmt.Println(" autor" + autor)
 	fmt.Println(preparePerformers)
 	if len(preparePerformers) > 0 {
 		Performer = preparePerformers[rand.Intn(len(preparePerformers))]
