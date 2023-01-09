@@ -4,29 +4,6 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-// Исполнители на проверку качества кода PHP
-var PerformersPHP = []string{
-	"@foxxy_9",
-	"@deSatEm",
-	"@Hezurus",
-	"@avp365",
-	"mikhail",
-	"@avp365",
-	"@ivanstukalin",
-	"@liigos",
-}
-
-// Исполнители на проверку качества кода GO
-var PerformersGo = []string{
-	"@deSatEm",
-	"@avp365",
-	"mikhail",
-	"@avp365",
-	"@ivanstukalin",
-	"@akaTheEnd",
-	"@liigos",
-}
-
 /**
 *  Помощь
  */
