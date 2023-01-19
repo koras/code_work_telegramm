@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"log"
+	"moex/models"
 	"os"
 	"path/filepath"
 
@@ -12,7 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
-//ConnectDB connects go to mysql database
+// ConnectDB connects go to mysql database
 func ConnectDB() *gorm.DB {
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
@@ -38,10 +39,11 @@ func ConnectDB() *gorm.DB {
 		panic("Failed to connect mysql database where base  ")
 	}
 
+	db.AutoMigrate(&models.User{}, &models.Stack{}, &models.Appointment{})
 	return db
 }
 
-//DisconnectDB is stopping your connection to mysql database
+// DisconnectDB is stopping your connection to mysql database
 func DisconnectDB(db *gorm.DB) {
 	dbSQL, err := db.DB()
 	if err != nil {

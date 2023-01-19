@@ -28,32 +28,37 @@ func deleteAutor(Performers []models.User, autor string) []string {
 	return newPerformers
 }
 
-/**
-*
- */
-func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, stack string) {
+func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, lang string) {
 	rand.Seed(time.Now().UnixNano())
 
 	var Performer string
 	var message string
 	var preparePerformers []string
 
+	stack := controllers.GetStackByLang(lang)
+	if stack.ID == 0 {
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Неверно указан стек.")
+		bot.Send(msg)
+		return
+	}
+
 	// список авторов
-	Performers := controllers.GetPerformers(stack)
+	Performers := controllers.GetActivePerformers(stack)
 
 	// автор сообщения
-	autor := update.Message.From.UserName
+	author := update.Message.From.UserName
 
 	fmt.Println(preparePerformers)
-	preparePerformers = deleteAutor(Performers, autor)
+	preparePerformers = deleteAutor(Performers, author)
 
-	fmt.Println(" autor" + autor)
+	fmt.Println(" author" + author)
 	fmt.Println(preparePerformers)
 	if len(preparePerformers) > 0 {
 		Performer = preparePerformers[rand.Intn(len(preparePerformers))]
-		message = "@" + Performer + "\n Вам назначена задача на проверку качества кода #kk #" + stack
+		controllers.AddAppointment(Performer)
+		message = "@" + Performer + "\n Вам назначена задача на проверку качества кода #kk #" + lang
 	} else {
-		message = "Нет доступных исполнителей для проверки, надо указать стек технологий, php или go "
+		message = "Нет доступных исполнителей для проверки"
 	}
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
 	bot.Send(msg)
@@ -63,43 +68,18 @@ func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, stack string) {
 * Запрашиваем исполнителей
  */
 func GetPerformers(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	var message = "Исполнители на проверку кода \n"
+	var stacks map[string][]string
 
-	var message string
-	var performersPHP []string
-	var performersGO []string
-	// список авторов
-	Performers := controllers.AllImplementer()
+	stacks = controllers.AllImplementer()
 
-	for _, performer := range Performers {
-		fmt.Println(performer.Nickname + " " + performer.Lang)
-		if performer.Lang == "php" {
-			performersPHP = append(performersPHP, performer.Nickname)
-		} else if performer.Lang == "go" {
-			performersGO = append(performersGO, performer.Nickname)
+	for stack, performers := range stacks {
+		message += fmt.Sprintf("%s: \n", stack)
+		for _, user := range performers {
+			message += "@" + user + " \n"
 		}
 	}
 
-	message = "Исполнители на проверку кода \n"
-
-	if len(performersPHP) > 0 {
-		message += "php: \n"
-		for _, performerPHP := range performersPHP {
-			fmt.Println(performerPHP)
-			message += "@" + performerPHP + " \n"
-		}
-	}
-
-	if len(performersGO) > 0 {
-		message += "go: \n"
-		for _, performerGO := range performersGO {
-			fmt.Println(performerGO)
-			message += "@" + performerGO + " \n"
-		}
-	}
-
-	if len(Performers) == 0 {
-		message = "Нет доступных исполнителей для проверки, надо указать стек технологий, php или go"
-	}
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
 
 	bot.Send(msg)
