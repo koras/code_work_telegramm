@@ -1,32 +1,32 @@
 package models
 
-// список сотрудников
+import "time"
 
 type User struct {
-	ID       uint
-	Nickname string
-	Stacks   Stack `json:"Stack" gorm:"foreignKey:UsersID"`
+	ID           uint
+	Nickname     string
+	Stacks       []Stack       `gorm:"many2many:user_stacks;constraint:OnDelete:CASCADE"`
+	Appointments []Appointment `gorm:"foreignKey:UserID;"`
+	VacationFrom *time.Time
+	VacationTo   *time.Time
 }
 
-// Какому сотруднику и какой стек
 type Stack struct {
-	ID      uint
-	UsersID uint
-	Lang    string
+	ID   uint `gorm:"primarykey"`
+	Lang string
 }
 
 // Для вычисления кому и что назначено
 type Appointment struct {
-	ID      uint
-	UsersID uint
-	Lang    string
+	ID        uint
+	CreatedAt *time.Time
+	UserID    uint
 }
 
-// Исполнители по списку
-type Appointments struct {
-	UsersID  uint
-	Lang     string
-	Nickname string
+// Схема исполнителя для запроса их списка
+type Performers struct {
+	StackID uint
+	Users   []string
 }
 
 func (User) TableName() string {
@@ -35,4 +35,8 @@ func (User) TableName() string {
 
 func (Stack) TableName() string {
 	return "stacks"
+}
+
+func (Appointment) TableName() string {
+	return "appointments"
 }

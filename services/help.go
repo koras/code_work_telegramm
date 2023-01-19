@@ -11,7 +11,12 @@ func Help(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	welcome := "Привет\n"
 	welcome += "Я бот который ставит задачу на проверку качества кода\n"
 	welcome += "Для назначения проверки достаточно упомянуть в чате 'ккк' или 'kkk'\n"
-	welcome += "Так же  обязательно нужно упомянуть язык 'php' или 'go'\n"
+	welcome += "Так же обязательно нужно упомянуть стек через пробел после kkk\n"
+	welcome += "/set [nickname] [стек через запятую] создаст пользоавтеля с заданным стеком. При существовании пользователя обновит его стек\n"
+	welcome += "/vacation [nickname] [dd.mm.yyyy] [days] запланирует пользователю отпуск с заданной даты на заданное количество дней\n"
+	welcome += "/kick [nickname] удалит пользователя\n"
+	welcome += "/stats сформирует статистику по выполненным проверкам\n"
+	welcome += "/performers сформирует список исполнителей по технологиям\n"
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, welcome)
 	bot.Send(msg)
