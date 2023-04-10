@@ -13,7 +13,7 @@ func GetStatistics(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	message = "Статистика по количеству проверок:\n"
 	for user, count := range stats {
-		message += fmt.Sprintf("@%s: %d проверок\n", user, count)
+		message += fmt.Sprintf("%s: %d проверок\n", user, count)
 	}
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
