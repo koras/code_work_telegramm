@@ -29,6 +29,7 @@ func deleteAutor(Performers []models.User, autor string) []string {
 }
 
 func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, lang string) {
+	
 	rand.Seed(time.Now().UnixNano())
 
 	var Performer string
@@ -55,7 +56,13 @@ func AssignTask(bot *tgbotapi.BotAPI, update tgbotapi.Update, lang string) {
 	fmt.Println(preparePerformers)
 	if len(preparePerformers) > 0 {
 		Performer = preparePerformers[rand.Intn(len(preparePerformers))]
-		controllers.AddAppointment(Performer)
+		if(update.Message.Chat.ID == -1001400698397){
+			controllers.AddAppointment(Performer)
+			fmt.Println("Добавляем в статистику")
+		}else{
+			fmt.Println("Вызван из другой группы")
+		}
+		
 		message = "@" + Performer + "\n Вам назначена задача на проверку качества кода #kk #" + lang
 	} else {
 		message = "Нет доступных исполнителей для проверки"
