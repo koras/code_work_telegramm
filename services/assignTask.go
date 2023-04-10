@@ -80,6 +80,7 @@ func GetPerformers(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		}
 	}
 
+	fmt.Println("Chat.ID" + update.Message.Chat.ID)
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
 
 	bot.Send(msg)
