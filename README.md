@@ -17,3 +17,5 @@ https://stackoverflow.com/questions/54456186/how-to-fix-environment-variables-no
 ### windows 
 
 go env -w GO111MODULE=on
+
+systemctl restart  bot_work_open_ru.service
