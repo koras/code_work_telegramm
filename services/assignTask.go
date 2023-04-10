@@ -76,7 +76,7 @@ func GetPerformers(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	for stack, performers := range stacks {
 		message += fmt.Sprintf("%s: \n", stack)
 		for _, user := range performers {
-			message += "@" + user + " \n"
+			message += "" + user + " \n"
 		}
 	}
 
